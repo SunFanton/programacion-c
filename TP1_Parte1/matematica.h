@@ -2,6 +2,7 @@
 #define MATEMATICA_H_INCLUDED
 #define FALSE 0
 #define TRUE 1
+#define TOL 0.001
 #include <math.h>
 
 typedef int BOOL;
@@ -12,9 +13,11 @@ typedef struct {
 }Division;
 
 BOOL esNumeroNatural(int n);
-long potencia(int n, int cant);
+long double potencia(double n, int cant);
 long factorial(int num);
-long combinatorio(int n, int m);
+long double combinatorio(int n, int m);
+double eALaX(double x);
+double raizCuadrada(double a);
 BOOL estaEnFibonacci(int n);
 double seno(float n, int cant);
 void naturalPerfectoDeficienteOAbundante(int n);

@@ -5,6 +5,8 @@
 int mostrarMenu();
 void ejercicio01();
 void ejercicio02();
+void ejercicio03();
+void ejercicio04();
 void ejercicio05();
 void ejercicio06();
 void ejercicio07();
@@ -28,6 +30,12 @@ int main()
                 break;
             case 2:
                 ejercicio02();
+                break;
+            case 3:
+                ejercicio03();
+                break;
+            case 4:
+                ejercicio04();
                 break;
             case 5:
                 ejercicio05();
@@ -119,7 +127,31 @@ void ejercicio02(){
         scanf("%d", &m);
     }while(n < 0 || m < 0);
 
-    printf("El combinatorio de %d y %d es: %d", n, m, combinatorio(n,m));
+    printf("El combinatorio de %d y %d es: %lf", n, m, combinatorio(n,m));
+}
+
+//Ejercicio 03
+void ejercicio03(){
+
+    double n;
+    printf("Ingrese un numero para elevar e a dicho numero: ");
+    scanf("%lf", &n);
+
+    printf("E elevado a %.2f es %.5f", n, eALaX(n));
+
+}
+
+//Ejercicio 04
+void ejercicio04(){
+
+    double n;
+    do{
+        printf("Ingrese un numero para saber su raiz cuadrada: ");
+        scanf("%lf", &n);
+    }while(n < 0);
+
+    printf("La raiz cuadrada de %.2f es %.5f", n, raizCuadrada(n));
+
 }
 
 //Ejercicio 05

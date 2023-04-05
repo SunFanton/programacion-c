@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1680656154 source:c:\users\sol\documents\programacion (varios)\c\tps\tp1_parte1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"matematica.h"
+
+1680656066 c:\users\sol\documents\programacion (varios)\c\tps\tp1_parte1\matematica.h
+	<math.h>
+
+1680656115 source:c:\users\sol\documents\programacion (varios)\c\tps\tp1_parte1\matematica.c
+	"matematica.h"
+	<stdio.h>
+

@@ -10,9 +10,9 @@ BOOL esNumeroNatural(int n){
 }
 
 //Obtener potencia de un numero
-long potencia(int n, int cant){
+long double potencia(double n, int cant){
 
-    long resul = 1;
+    long double resul = 1;
 
     for(int i = 1; i <= cant; i++){
         resul *= n;
@@ -33,8 +33,38 @@ long factorial(int n) {
 }
 
 //02 Combinatorio
-long combinatorio(int n, int m) {
-    return factorial(m)/(factorial(n)*factorial(m-1));
+long double combinatorio(int n, int m) {
+    return (long double) (factorial(m)/(factorial(n)*factorial(m-1)));
+}
+
+//03 E a la x:
+
+double eALaX(double x) {
+    double e = 1;
+    double termino = 1;
+    int iteracion = 1;
+
+    do{
+        termino = potencia(x,iteracion)/(double)factorial(iteracion);
+        e = e + termino;
+        iteracion++;
+    }while(termino >= TOL);
+
+    return e;
+}
+
+//04 Raiz cuadrada:
+double raizCuadrada(double a){
+
+    double termAnterior = 1;
+    double termSiguiente = (termAnterior + (a/termAnterior))/2;
+
+    while(fabs(termSiguiente - termAnterior) > TOL) {
+        termAnterior = termSiguiente;
+        termSiguiente = (termAnterior + (a/termAnterior))/2;
+    }
+
+    return termSiguiente;
 }
 
 //05 Entero esta en Fibonacci
