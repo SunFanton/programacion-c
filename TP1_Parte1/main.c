@@ -127,7 +127,7 @@ void ejercicio02(){
         scanf("%d", &m);
     }while(n < 0 || m < 0);
 
-    printf("El combinatorio de %d y %d es: %lf", n, m, combinatorio(n,m));
+    printf("El combinatorio de %d y %d es: %.2lf", n, m, combinatorio(n,m));
 }
 
 //Ejercicio 03

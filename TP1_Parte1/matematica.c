@@ -33,8 +33,9 @@ long factorial(int n) {
 }
 
 //02 Combinatorio
-long double combinatorio(int n, int m) {
-    return (long double) (factorial(m)/(factorial(n)*factorial(m-1)));
+double combinatorio(int n, int m) {
+    double result = (double)factorial(m)/(double)(factorial(n)*factorial(m-1));
+    return result;
 }
 
 //03 E a la x:

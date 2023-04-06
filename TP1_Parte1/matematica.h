@@ -15,7 +15,7 @@ typedef struct {
 BOOL esNumeroNatural(int n);
 long double potencia(double n, int cant);
 long factorial(int num);
-long double combinatorio(int n, int m);
+double combinatorio(int n, int m);
 double eALaX(double x);
 double raizCuadrada(double a);
 BOOL estaEnFibonacci(int n);
