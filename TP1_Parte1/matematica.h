@@ -4,6 +4,7 @@
 #define TRUE 1
 #define TOL 0.001
 #include <math.h>
+#include <stdlib.h>
 
 typedef int BOOL;
 
@@ -26,7 +27,7 @@ Division cocienteYResto(int a, int b);
 int sumaPrimerosNNaturales(int n);
 int sumaPrimerosNPares(int n);
 int sumaParesMenoresAN(int n);
-BOOL esPrimo(int n);
+BOOL *esPrimo(int *ptrN); //Ejemplo usando punteros
 
 
 

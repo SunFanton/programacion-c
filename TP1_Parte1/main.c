@@ -271,7 +271,7 @@ void ejercicio12(){
 
 }
 
-//Ejercicio 13
+//Ejercicio 13 (ejemplo usando punteros)
 void ejercicio13(){
 
     int n;
@@ -280,9 +280,9 @@ void ejercicio13(){
         scanf("%d", &n);
     }while(n <= 1);
 
-    BOOL primo = esPrimo(n);
+    BOOL *primo = esPrimo(&n);
 
-    if(primo)
+    if(*primo)
         printf("%d es primo", n);
     else
         printf("%d no es primo", n);

@@ -34,7 +34,7 @@ long factorial(int n) {
 
 //02 Combinatorio
 double combinatorio(int n, int m) {
-    double result = (double)factorial(m)/(double)(factorial(n)*factorial(m-1));
+    double result = (double)factorial(n)/(double)(factorial(m)*factorial(n-1));
     return result;
 }
 
@@ -181,20 +181,32 @@ int sumaParesMenoresAN(int n){
 }
 
 //13 Dererminar si el numero natural es primo
-BOOL esPrimo(int n) {
+//Ejemplo usando punteros
+BOOL *esPrimo(int *ptrN) {
 
     int cantDivisores = 0;
-    for(int i = 1; i <= n; i++) {
-        if(n%i == 0){
+
+    /*
+    Asigno una posicion de memoria de manera dinamica a traves de malloc
+    Dicha posicion debe tener el espacio de una variable de tipo BOOL (int)
+    Por ultimo (BOOL *) es para castear el puntero generico void * que retorna malloc
+    a un puntero de tipo BOOL *
+    */
+    BOOL *prtResult = (BOOL *)malloc(sizeof(BOOL));
+
+    for(int i = 1; i <= (*ptrN); i++) {
+        if((*ptrN)%i == 0){
             cantDivisores++;
         }
+        if(cantDivisores > 2)
+            break;
+
     }
     if(cantDivisores == 2){
-        return TRUE;
-    }
-    else if(cantDivisores > 2){
-        return FALSE;
+        *prtResult = TRUE;
     }
     else
-        return FALSE;
+        *prtResult = FALSE;
+
+        return prtResult;
 }
