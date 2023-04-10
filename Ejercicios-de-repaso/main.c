@@ -286,4 +286,6 @@ void ejercicio13(){
         printf("%d es primo", n);
     else
         printf("%d no es primo", n);
+
+    free(primo);
 }
