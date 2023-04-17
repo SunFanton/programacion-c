@@ -2,6 +2,9 @@
 
 void ordenamientoBurbuja(int *vec, int cant){
 
+    if(cant == 1)
+        return;
+
     int i = 1,
         aux;
 
@@ -33,7 +36,7 @@ int llenarVector(int *vec, int cant){
     scanf("%d", &cantAIngresar);
 
     while(cantAIngresar < 1 || cantAIngresar > cant){
-        printf("\nLo sentimos, debe ingresar minimo 1 elementos y maximo %d elementos. Intente nuevamente: ", cant);
+        printf("\nLo sentimos, debe ingresar minimo 1 elemento y maximo %d elementos. Intente nuevamente: ", cant);
         scanf("%d", &cantAIngresar);
     }
 
@@ -77,4 +80,81 @@ BOOL insertarElementoManteniendoOrden(int *vec, int elem, int cantElem, int tam)
     }
     *vec = elem;
     return TRUE;
+}
+
+BOOL eliminarElementoSegunPos(int *vec, int cantElem, int pos){
+
+    BOOL eliminado = FALSE;
+
+    int *fin = vec + cantElem - 1;
+    int *inicio = vec + pos - 1;
+
+    while(inicio <= fin){
+        *inicio = *(inicio + 1);
+        inicio++;
+    }
+
+    eliminado = TRUE;
+    return eliminado;
+
+}
+
+BOOL eliminarPrimerOcurrencia(int *vec, int cantElem, int elem){
+
+    BOOL encontrado = FALSE;
+    int *fin = vec + cantElem - 1;
+
+    for(int i = 1; i <= cantElem; i++){
+        if(*vec == elem){
+            encontrado = TRUE;
+            break;
+        }
+        vec++;
+    }
+
+    if(encontrado){
+        while(vec <= fin){
+            *vec = *(vec + 1);
+            vec++;
+        }
+    }
+    return encontrado;
+}
+
+BOOL eliminarTodasLasOcurrencias(int *vec, int cantElem, int elem){
+
+    BOOL encontrado = FALSE;
+    BOOL eliminado = FALSE;
+    int cont = 0;
+    int *fin = vec + cantElem - 1;
+    int *inicio = vec;
+
+    do{
+         for(int i = 1; i <= cantElem; i++){
+            if(*vec == elem){
+                cont++;
+                break;
+            }
+            vec++;
+        }
+
+        if(cont){
+            encontrado = TRUE;
+            while(vec <= fin){
+                *vec = *(vec + 1);
+                vec++;
+            }
+            cantElem--;
+            vec = inicio;
+            fin = vec + cantElem - 1;
+            cont = 0;
+            eliminado = TRUE;
+        }
+        else{
+            encontrado = FALSE;
+        }
+
+    }while(encontrado);
+
+    return eliminado;
 }
