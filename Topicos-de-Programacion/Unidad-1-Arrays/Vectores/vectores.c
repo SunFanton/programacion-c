@@ -1,31 +1,56 @@
 #include "vectores.h"
 
+void ordenamientoBurbuja(int *vec, int cant){
+
+    int i = 1,
+        aux;
+
+    int *fin;
+    int *inicio = vec;
+
+    while(i < cant){
+        fin = vec + cant - i;
+
+        while(vec < fin){
+            if(*vec > *(vec+1)){
+                aux = *vec;
+                *vec = *(vec+1);
+                *(vec+1) = aux;
+            }
+            vec++;
+        }
+        vec = inicio;
+        i++;
+    }
+}
+
 int llenarVector(int *vec, int cant){
 
-    int ingresados = 0,
-        pos = 0,
-        continuar = TRUE;
+    int cantAIngresar;
+    int *fin = vec + cant - 1;
 
-    do{
-        printf("Ingrese un numero para la posicion %d del vector: ", (pos + 1));
+    printf("Ingrese cuantos elementos quiere insertar en el vector ahora mismo: ");
+    scanf("%d", &cantAIngresar);
+
+    while(cantAIngresar < 1 || cantAIngresar > cant){
+        printf("\nLo sentimos, debe ingresar minimo 1 elementos y maximo %d elementos. Intente nuevamente: ", cant);
+        scanf("%d", &cantAIngresar);
+    }
+
+    for(int i = 0; i < cantAIngresar; i++){
+        printf("Elemento %d: ", (i+1));
         scanf("%d", vec);
-        pos++;
-        ingresados++;
         vec++;
-        if(ingresados < cant){
-            printf("Desea seguir ingresando datos? 1 para si, 0 para no: ");
-            scanf("%d", &continuar);
-        }
-    }while(continuar && ingresados < cant);
+    }
 
-    if(ingresados < cant){
-        for(int i = pos; i < cant; i++){
+    if(cantAIngresar < cant){
+        while(vec <= fin){
             *vec = 0;
             vec++;
         }
     }
-    return ingresados;
 
+    return cantAIngresar;
 }
 
 

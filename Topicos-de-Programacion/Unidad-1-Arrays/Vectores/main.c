@@ -92,7 +92,7 @@ void ejercicio1_2(){
     scanf("%d", &tam);
     int vec[tam];
     int ce = llenarVector(vec,tam);
-    //Aca deberia ordenarse
+    ordenamientoBurbuja(vec,ce);
     int elem,
         vecLeng = sizeof vec / sizeof vec[0];
 
