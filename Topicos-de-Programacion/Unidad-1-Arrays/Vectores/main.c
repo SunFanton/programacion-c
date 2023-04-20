@@ -8,6 +8,8 @@ void ejercicio1_2();
 void ejercicio1_3();
 void ejercicio1_4();
 void ejercicio1_5();
+void ejercicio1_6();
+void ejercicio1_7();
 
 int main()
 {
@@ -32,6 +34,12 @@ int main()
             case 5:
                 ejercicio1_5();
                 break;
+            case 6:
+                ejercicio1_6();
+                break;
+            case 7:
+                ejercicio1_7();
+                break;
             default:
                 printf("No existe esa opcion, intente nuevamente");
                 break;
@@ -53,6 +61,8 @@ int mostrarMenu(){
     printf("\t3. Eliminar un elemento en un arreglo de enteros, segun posicion dada.\n");
     printf("\t4. Eliminar primer ocurrencia de un elemento dado, de un arreglo de enteros.\n");
     printf("\t5. Eliminar todas las ocurrencias de un elemento dado, de un arreglo de enteros.\n");
+    printf("\t6. Averiguar si una cadena de caracteres es palindromo.\n");
+    printf("\t7. Obtener el valor numerico de una cadena.\n");
     printf("\t0. Salir\n\n");
     printf("Opcion elegida: ");
     scanf("%d", &eleccion);
@@ -236,5 +246,30 @@ void ejercicio1_5(){
     else {
         printf("\nLo sentimos. No se ha eliminado el elemento porque no ha sido encontrado\n");
     }
+}
+
+//Ejercicio 1.6
+void ejercicio1_6(){
+
+    int longitud;
+    printf("\nIngrese la longitud de la cadena: ");
+    scanf("%d", &longitud);
+    char cadena[longitud];
+    fflush(stdin);
+    printf("\nIngrese la cadena: ");
+    fgets(cadena,longitud,stdin);
+    fflush(stdin);
+
+    BOOL resul = cadenaEsPalindromo(cadena, longitud);
+    if(resul){
+        printf("\nLa cadena %s es palindromo", cadena);
+    }
+    else{
+        printf("\nLa cadena %s no es palindromo", cadena);
+    }
+}
+
+void ejercicio1_7(){
+
 
 }
