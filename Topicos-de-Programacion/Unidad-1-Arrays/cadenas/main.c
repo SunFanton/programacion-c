@@ -86,7 +86,7 @@ void ejercicio1_7(){
     fgets(cadena,longitud,stdin);
     fflush(stdin);
 
-    printf("\nLa cadena \"%s\" en digitos numericos es %d", cadena, valorNumericoEnteroDeCadena(cadena));
+    printf("\nLa cadena en digitos numericos es %d", valorNumericoEnteroDeCadena(cadena));
 }
 
 //Ejercicio 1.8
@@ -99,7 +99,7 @@ void ejercicio1_8(){
     fflush(stdin);
     char cadena[longitud];
     printf("\nIngrese la cadena: ");
-    fgets(cadena,longitud,stdin);
+    gets(cadena);
     fflush(stdin);
 
     printf("\nIngrese la longitud de la cadena cuya cantidad de ocurrencias se buscaran: ");
@@ -107,7 +107,7 @@ void ejercicio1_8(){
     fflush(stdin);
     char buscada[longitud];
     printf("\nIngrese la cadena: ");
-    fgets(buscada,longitud,stdin);
+    gets(buscada);
     fflush(stdin);
 
     printf("\nLa cantidad de ocurrencias en la cadena es %d", cantidadOcurrenciasPalabra(cadena,buscada));

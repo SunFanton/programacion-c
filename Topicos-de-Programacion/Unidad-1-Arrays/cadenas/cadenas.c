@@ -51,57 +51,31 @@ int cadenaEsPalindromo(char *cadena){
     int longitud = strlenPropio(cadena) + 1;
     char cadenaOriginal[longitud];
     char cadenaInvertida[longitud];
-    char *prtInvertida;
-    prtInvertida = cadenaInvertida;
 
     substring(cadenaOriginal, cadena, 0, strlenPropio(cadena));
-    char *fin = cadena + strlenPropio(cadena);
-    //int i = 0;
+    //substring(cadenaInvertida, cadena, 0, strlenPropio(cadena));
+    char *fin = cadena + strlenPropio(cadena) - 1;
+    int i = 0;
 
     while(fin >= cadena){
-        *prtInvertida = *fin;
+        cadenaInvertida[i] = *fin;
         fin--;
-        prtInvertida++;
+        i++;
     }
 
-    *cadenaInvertida = '\0';
+    cadenaInvertida[i] = '\0';
 
     int comp = strcmpi(cadenaOriginal,cadenaInvertida);
     BOOL esPalindromo = comp == 0 ? TRUE : FALSE;
 
     return esPalindromo;
-/*
-    char cadena1[longitud];
-    char cadena2[longitud];
-    char *inicio = cadena;
-    char *fin = cadena + longitud - 2; //-2 porque el ultimo caracter es de fin de cadena
-    int i = 0;
-
-    while(cadena <= fin){
-        cadena1[i] = *cadena;
-        cadena++;
-        i++;
-    }
-    i = 0;
-    cadena = inicio;
-
-    while(fin >= cadena){
-        cadena2[i] = *fin;
-        fin--;
-        i++;
-    }
-
-    int comp = strcmpi(cadena1,cadena2);
-    BOOL esPalindromo = comp == 0 ? TRUE : FALSE;
-
-    return esPalindromo;
-    */
 }
 
 ///EJERCICIO 1.7
 int valorNumericoEnteroDeCadena(char *cadena){
 
     int num = 0;
+    int leng = strlenPropio(cadena) - 1;
 
     /*Los numeros son representados a partir del 30 (equivalente a 0) en ASCII
     Si a un char que representa un digito le restamos 30, obtenemos su valor numerico
@@ -109,7 +83,7 @@ int valorNumericoEnteroDeCadena(char *cadena){
     Como tenemos mas d eun char y mas de un digito, debemos multiplicar por 10
     para ir agregando las unidades. EJ:
     1 * 10 = 10 => 10 + 2 = 12, 12 * 10 = 120 => 120 + 3 = 123...*/
-    for(int i = 0; cadena[i] != '\0'; i++){
+    for(int i = 0; i < leng; i++){
         num = num * 10 + cadena[i] - '0';
     }
 
@@ -121,8 +95,8 @@ int cantidadOcurrenciasPalabra(char *cadena, char *buscada){
 
    //int lengCadena = strlen(cadena);
    //int lengBuscada = strlen(buscada);
-   int lengCadena = strlen(cadena);
-   int lengBuscada = strlen(buscada);
+   int lengCadena = strlenPropio(cadena);
+   int lengBuscada = strlenPropio(buscada);
 
    if(lengBuscada > lengCadena){
         return -1;
@@ -135,7 +109,7 @@ int cantidadOcurrenciasPalabra(char *cadena, char *buscada){
     int comp;
 
     while(i < lengCadena){
-        if(i + lengBuscada <= lengCadena){
+        if(i + lengBuscada - 1 < lengCadena){
              substring(subCadena,cadena,i,lengBuscada);
              comp = strcmpi(subCadena, buscada);
              if(!comp){
