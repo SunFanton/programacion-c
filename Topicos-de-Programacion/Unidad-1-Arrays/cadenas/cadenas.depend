@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1682174318 source:c:\users\ale\documents\cadenas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1682283544 source:c:\users\ale\documents\c\cadenas\cadenas.c
+	"cadenas.h"
+
+1682283522 c:\users\ale\documents\c\cadenas\cadenas.h
+	<string.h>
+
+1682283146 source:c:\users\ale\documents\c\cadenas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"cadenas.h"
+
+1682294500 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-1-arrays\cadenas\cadenas.c
+	"cadenas.h"
+
+1682291721 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-1-arrays\cadenas\cadenas.h
+	<string.h>
+
+1682292392 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-1-arrays\cadenas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"cadenas.h"
+
