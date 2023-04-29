@@ -14,6 +14,5 @@ BOOL insertarElementoManteniendoOrden(int *vec, int elem, int cantElem, int tam)
 BOOL eliminarElementoSegunPos(int *vec, int cantElem, int pos);
 BOOL eliminarPrimerOcurrencia(int *vec, int cantElem, int elem);
 BOOL eliminarTodasLasOcurrencias(int *vec, int cantElem, int elem);
-BOOL cadenaEsPalindromo(char *cadena, int longitud);
 
 #endif // VECTORES_H_INCLUDED

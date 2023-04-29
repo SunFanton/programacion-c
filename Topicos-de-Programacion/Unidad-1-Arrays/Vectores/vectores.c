@@ -159,31 +159,5 @@ BOOL eliminarTodasLasOcurrencias(int *vec, int cantElem, int elem){
     return eliminado;
 }
 
-BOOL cadenaEsPalindromo(char *cadena, int longitud){
-
-    char cadena1[longitud];
-    char cadena2[longitud];
-    char *inicio = cadena;
-    char *fin = cadena + longitud - 2; //-2 porque el ultimo caracter es de fin de cadena
-    int i = 0;
-
-    while(cadena <= fin){
-        cadena1[i] = *cadena;
-        cadena++;
-        i++;
-    }
-    i = 0;
-    cadena = inicio;
-
-    while(fin >= cadena){
-        cadena2[i] = *fin;
-        fin--;
-        i++;
-    }
-
-    int comp = strcmpi(cadena1,cadena2);
-    BOOL esPalindromo = comp == 0 ? TRUE : FALSE;
-    return esPalindromo;
-}
 
 
