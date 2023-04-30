@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1682884947 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad 3-pasaje de parametros\ord_seleccion_no_generico\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Seleccion.h"
+
+1682884937 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad 3-pasaje de parametros\ord_seleccion_no_generico\seleccion.h
+
+1682881669 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad 3-pasaje de parametros\ord_seleccion_no_generico\seleccion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
