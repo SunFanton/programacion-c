@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="SeleccionGenerico.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SeleccionGenerico.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

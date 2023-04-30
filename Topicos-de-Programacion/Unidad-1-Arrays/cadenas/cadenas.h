@@ -6,6 +6,7 @@
 
 typedef int BOOL;
 
+BOOL esLetra(char caracter);
 int contarPalabras(char *cad);
 char* substringPropio(char *destination, const char *source, int beg, int n);
 int strlenPropio(const char *cad);
@@ -17,5 +18,7 @@ int cadenaEsPalindromo(char *cadena);
 int valorNumericoEnteroDeCadena(char *cadena);
 ///EJERCICIO 1.8
 int cantidadOcurrenciasPalabra(char *cadena, char *buscada);
+///EJERCICIO 1.9
+void normalizarCadenaYQuitarEspaciosExcedentes(char *cadena);
 
 #endif // CADENAS_H_INCLUDED

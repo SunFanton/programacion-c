@@ -1,5 +1,11 @@
 #include "cadenas.h"
 
+BOOL esLetra(char caracter){
+    if(caracter >= 'A' && caracter <='z')
+        return TRUE;
+    return FALSE;
+}
+
 int contarPalabras(char *cad){
 
     int cont = 0,
@@ -155,4 +161,23 @@ int cantidadOcurrenciasPalabra(char *cadena, char *buscada){
     }
     return cont;
 
+}
+
+///EJERCICIO 1.9
+void normalizarCadenaYQuitarEspaciosExcedentes(char *cadena){
+
+    char *inicio = cadena;
+    int cont = 0;
+
+    while(*cadena){
+        if(*cadena == ' ')
+            cont++;
+        while(*cadena && esLetra(*cadena)){
+            if(*(cadena - 1)==' ' || cadena == inicio)
+               *cadena = *cadena - ('a' - 'A'); //Paso a mayuscula la primer letra de la palabra
+            //FALTA ELIMINAR ESPACIOS EXCEDENTES
+            cadena++;
+        }
+        cadena++;
+    }
 }

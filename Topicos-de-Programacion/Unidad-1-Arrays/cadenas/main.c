@@ -6,6 +6,7 @@ int mostrarMenu();
 void ejercicio1_6();
 void ejercicio1_7();
 void ejercicio1_8();
+void ejercicio1_9();
 
 int main(){
 
@@ -23,6 +24,9 @@ int main(){
                 break;
             case 3:
                 ejercicio1_8();
+                break;
+            case 4:
+                ejercicio1_9();
                 break;
             default:
                 printf("No existe esa opcion, intente nuevamente");
@@ -44,6 +48,7 @@ int mostrarMenu(){
     printf("\t1. Averiguar si una cadena de caracteres es palindromo.\n");
     printf("\t2. Obtener el valor numerico de una cadena.\n");
     printf("\t3. Obtener cantidad de ocurrencias de una palabra (cadena) dentro de otra.\n");
+    printf("\t4. Normalizar una cadena y quitar espacios excedentes.\n");
     printf("\t0. Salir\n\n");
     printf("Opcion elegida: ");
     scanf("%d", &eleccion);
@@ -113,3 +118,20 @@ void ejercicio1_8(){
     printf("\nLa cantidad de ocurrencias en la cadena es %d", cantidadOcurrenciasPalabra(cadena,buscada));
 }
 
+//Ejercicio 1.9
+void ejercicio1_9(){
+
+    int longitud;
+
+    printf("\nIngrese la longitud de la cadena (ultima posicion sera de fin de cadena): ");
+    scanf("%d", &longitud);
+    fflush(stdin);
+    char cadena[longitud];
+    printf("\nIngrese la cadena: ");
+    gets(cadena);
+    fflush(stdin);
+
+    normalizarCadenaYQuitarEspaciosExcedentes(cadena);
+    printf("\n\nLa cadena normalizada y sin espacios excedentes es: %s", cadena);
+
+}
