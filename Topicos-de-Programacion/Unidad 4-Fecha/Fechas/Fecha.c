@@ -1,6 +1,7 @@
 #include "Fecha.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 BOOL esFechaValida(tFecha *f){
     if(f->anio>1600)
@@ -119,4 +120,66 @@ int diasDiferenciaEntreFechas(tFecha *fecha1, tFecha *fecha2){
     diferencia += diasTranscurridosFecha2 - diasTranscurridosFecha1;
 
     return diferencia;
+}
+
+/*Funcion para obtener dia de la semana segun una fecha.
+En dicha funcion se utilizara el algoritmo de Zeller, que consiste
+en una formula matematica para obtener dicho dia.
+El algoritmo enlaza un numero de codigo al dia de la semana, un codigo
+al mes y un codigo al numero de siglo:
+
+Dia de la semana:       Mes:                                    Siglo (se toma las dos primeras cifras del año):
+0 -> Domingo            0 -> Enero      2 -> Agosto             6 -> 1600
+1 -> Lunes              3 -> Febrero    5 -> Septiembre         4 -> 1700
+2 -> Martes             3 -> Marzo      0 -> Octubre            2 -> 1800
+3 -> Miercoles          6 -> Abril      3 -> Noviembre          0 -> 1900
+4 -> Jueves             1 -> Mayo       5 -> Diciembre          6 -> 2000
+5 -> Viernes            4 -> Junio
+6 -> Sabado             6 -> Julio
+
+Formula:
+Dia +
+Codigo del mes +
+Codigo del siglo +
+Cociente de dividir dos digitos finales del año por 4 +
+Resto de dividir dos digitos finales del año por 7
+
+El resultado de la suma se divide por 7 y el resto sera el codigo del dia de
+la semana
+
+Por ej: 16 Julio 1969
+16 + 6 + 0 + 17 + 6 = 45 -> 45 % 7 = 3 -> Miercoles
+
+Se agrega un paso extra si el año es bisiesto y el mes es Enero o Febrero, y es que
+se resta 1 al resultado final
+Ej: 1 Enero 2020
+1 + 0 + 6 + 5 + 6 = 18 -> 18 % 7 = 4 -> 4 - 1 -> Miercoles
+*/
+int obtenerDiaSemana(tFecha *ptr){
+
+    int codigosXMes[] = {0,3,3,6,1,4,6,2,5,0,3,5};
+    int codigosXSiglo[5][2] = {{16,6},{17,4},{18,2},{19,0},{20,6}};
+
+    char anio[5];
+    itoa(ptr->anio, anio, 10); //int a char
+    char anioPrimerosDigitos[] = {anio[0], anio[1], '\0'};
+    char anioUltimosDigitos[] = {anio[2], anio[3], '\0'};
+
+    int siglo = atoi(anioPrimerosDigitos); //char a int
+    int anioAOperar = atoi(anioUltimosDigitos); //char a int
+    int codigoSiglo,
+        codigoMes = codigosXMes[ptr->mes - 1];
+
+    for(int i = 0; i < 5; i++){
+        if(siglo == codigosXSiglo[i][0])
+            codigoSiglo = codigosXSiglo[i][1];
+    }
+
+    int diaSemana = ptr->dia + codigoMes + codigoSiglo + anioAOperar/4 + anioAOperar%7;
+    diaSemana %= 7;
+
+    if(esBisiesto(ptr->anio) && (ptr->mes==1 || ptr->mes==2))
+        diaSemana--;
+
+    return diaSemana;
 }

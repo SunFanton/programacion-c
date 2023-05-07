@@ -8,6 +8,7 @@ void ejercicio4_2();
 void ejercicio4_3();
 void ejercicio4_4();
 void ejercicio4_5();
+void ejercicio4_6();
 
 int main()
 {
@@ -32,6 +33,9 @@ int main()
             case 5:
                 ejercicio4_5();
                 break;
+            case 6:
+                ejercicio4_6();
+                break;
             default:
                 printf("No existe esa opcion, intente nuevamente");
                 break;
@@ -52,6 +56,7 @@ int mostrarMenu(){
     printf("\t3. Sumarle N dias a una fecha y obtener la nueva fecha.\n");
     printf("\t4. Restarle N dias a una fecha y obtener la nueva fecha.\n");
     printf("\t5. Obtener la diferencia en dias entre dos fechas.\n");
+    printf("\t6. Obtener dia de la semana segun fecha.\n");
     printf("\t0. Salir.\n");
     printf("Opcion: ");
     scanf("%d", &eleccion);
@@ -252,4 +257,44 @@ void ejercicio4_5(){
 
     free(ptrFecha1);
     free(ptrFecha2);
+}
+
+void ejercicio4_6(){
+
+    printf("\n\n----- OBTENER DIA DE LA SEMANA -----\n\n");
+
+    tFecha *ptrFecha = (tFecha*)malloc(1 * sizeof(tFecha));
+
+    if(ptrFecha == NULL){
+        printf("Memoria insuficiente para asginar dinamicamente");
+        exit(0);
+    }
+
+    printf("Ingrese el dia: ");
+    scanf("%d", &ptrFecha->dia);
+    printf("Ingrese el mes: ");
+    scanf("%d", &ptrFecha->mes);
+    printf("Ingrese el anio: ");
+    scanf("%d", &ptrFecha->anio);
+
+    while(!esFechaValida(ptrFecha)){
+        printf("\nNo has ingresado una fecha valida. Intenta nuevamente\n");
+        printf("Ingrese el dia: ");
+        scanf("%d", &ptrFecha->dia);
+        printf("Ingrese el mes: ");
+        scanf("%d", &ptrFecha->mes);
+        printf("Ingrese el anio: ");
+        scanf("%d", &ptrFecha->anio);
+    }
+
+    tDiaSemana dias[7] = {{0, "Domingo"},
+                          {1, "Lunes"},
+                          {2, "Martes"},
+                          {3, "Miercoles"},
+                          {4, "Jueves"},
+                          {5, "Viernes"},
+                          {6, "Sabado"}};
+    printf("\nEl dia de la semana es: %s", dias[obtenerDiaSemana(ptrFecha)].dia);
+
+    free(ptrFecha);
 }

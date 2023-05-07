@@ -10,6 +10,11 @@ typedef struct{
     int anio;
 }tFecha;
 
+typedef struct{
+    int codigo;
+    char dia[10];
+}tDiaSemana;
+
 typedef int BOOL;
 
 BOOL esFechaValida(tFecha *);
@@ -20,5 +25,6 @@ void sumarNDias(tFecha *, int);
 void restarNDias(tFecha *, int);
 int diasDesdeInicioAnio(tFecha *);
 int diasDiferenciaEntreFechas(tFecha *, tFecha *);
+int obtenerDiaSemana(tFecha *);
 
 #endif // FECHA_H_INCLUDED
