@@ -6,6 +6,7 @@
 char* copiaCadena(const char *origen);
 void* copiaCosas(void* elemento, unsigned tam);
 void* miMemmove(void* destino, void* origen, size_t tam);
+void* miMemcpy(void* destino, void* origen, size_t tam);
 
 typedef int BOOL;
 
@@ -275,4 +276,17 @@ void* miMemmove(void* destino, void* origen, size_t tam){
     free(temp);
 
     return cDestino;
+}
+
+void* miMemcpy(void* destino, void* origen, size_t tam){
+
+    char *cDestino = (char*)destino;
+    char *cOrigen = (char*)origen;
+
+    for(int i = 0; i < tam; i++){
+        *cDestino = *cOrigen;
+        cOrigen++;
+        cDestino++;
+    }
+    return destino;
 }
