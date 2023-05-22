@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1684714222 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\abm-binario-empleados-estudiantes\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
