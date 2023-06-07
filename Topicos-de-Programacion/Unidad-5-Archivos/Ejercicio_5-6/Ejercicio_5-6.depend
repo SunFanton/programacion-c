@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1686177472 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\ejercicio_5-6\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ManejoArchivo.h"
+
+1686178041 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\ejercicio_5-6\manejoarchivo.h
+
+1686178196 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\ejercicio_5-6\manejoarchivo.c
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"ManejoArchivo.h"
+
