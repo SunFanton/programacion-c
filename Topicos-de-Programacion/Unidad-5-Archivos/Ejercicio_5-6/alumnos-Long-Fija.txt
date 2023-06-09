@@ -1,0 +1,14 @@
+   Apellido/s, Nombre/s    P. 1  P. 2 Prome
+   ====================   ===== ===== =====
+                                           
+ 1 garcia, sol             6.00  8.00  7.00
+ 2 fuentes, carmen         8.00  8.00  8.00
+                                           
+   Apellido/s, Nombre/s    P. 1  P. 2 Prome
+   ====================   ===== ===== =====
+                                           
+ 3 juarez, tomas           7.00  8.00  7.50
+                                           
+                          ===== ===== =====
+                                           
+                           7.00  8.00  7.50

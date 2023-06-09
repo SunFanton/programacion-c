@@ -10,11 +10,8 @@ int ingresarAlumnos(t_alumno *vec_alu, float *promGenerales){
     char ingresar = 'S';
     do{
         fflush(stdin);
-        printf("Ingrese el nombre del alumno: ");
-        gets(vec_alu->nombre);
-        fflush(stdin);
-        printf("Ingrese el apellido del alumno: ");
-        gets(vec_alu->apellido);
+        printf("Ingrese el apellido y nombre del alumno, separados por coma: ");
+        gets(vec_alu->apNom);
         fflush(stdin);
         ingresarParcialesYCalcularPromedio(vec_alu->parciales, &vec_alu->promedio);
         cantIngresada += 1;
@@ -29,6 +26,9 @@ int ingresarAlumnos(t_alumno *vec_alu, float *promGenerales){
                 vec_alu++;
                 printf("\n");
             }
+        }
+        else{
+            ingresar = 'N';
         }
 
     }while(ingresar == 'S');
@@ -52,11 +52,12 @@ void ingresarParcialesYCalcularPromedio(float *parciales, float *promedio){
 void mostrarAlumnosPorPantalla(t_alumno *vec_alu, int ce){
 
     t_alumno *inicio = vec_alu;
+
+    //Impresion en pantalla usando campos de longitud fija
     for(int i = 0; i < ce; i++){
-        printf("\n%2d %10s, %-10s %5.2f %5.2f %5.2f",
+        printf("\n%2d %-20s %5.2f %5.2f %5.2f",
                vec_alu->numAlu,
-               vec_alu->apellido,
-               vec_alu->nombre,
+               vec_alu->apNom,
                vec_alu->parciales[0],
                vec_alu->parciales[1],
                vec_alu->promedio);
@@ -65,4 +66,60 @@ void mostrarAlumnosPorPantalla(t_alumno *vec_alu, int ce){
     }
      vec_alu = inicio;
      printf("\n");
+}
+
+int cargarArchivoTextoAlumnosLongitudFija(char *path, t_alumno *vec_alu, int cantIngresada){
+
+    FILE *pf = fopen(path, "wt");
+    if(!pf){
+        return 0;
+    }
+
+    float sumaParciales1 = 0,
+          sumaParciales2 = 0,
+          sumaPromedios = 0,
+          promParciales1,
+          promParciales2,
+          promGeneral;
+
+    //Escritura usando campos de longitud fija
+    fprintf(pf, "   Apellido/s, Nombre/s    P. 1  P. 2 Prome\n");
+    fprintf(pf, "   ====================   ===== ===== =====\n");
+    fprintf(pf, "                                           \n");
+
+    for(int i = 0; i < cantIngresada; i++){
+        fprintf(pf, "%2d %-20s   %5.2f %5.2f %5.2f\n",
+                    vec_alu[i].numAlu,
+                    vec_alu[i].apNom,
+                    vec_alu[i].parciales[0],
+                    vec_alu[i].parciales[1],
+                    vec_alu[i].promedio);
+
+        sumaParciales1 += vec_alu[i].parciales[0];
+        sumaParciales2 += vec_alu[i].parciales[1];
+        sumaPromedios += vec_alu[i].promedio;
+
+        if(vec_alu[i].numAlu % 2 == 0){
+            fprintf(pf, "                                           \n");
+            fprintf(pf, "   Apellido/s, Nombre/s    P. 1  P. 2 Prome\n");
+            fprintf(pf, "   ====================   ===== ===== =====\n");
+            fprintf(pf, "                                           \n");
+        }
+    }
+
+    promParciales1 = sumaParciales1/cantIngresada;
+    promParciales2 = sumaParciales2/cantIngresada;
+    promGeneral = sumaPromedios/cantIngresada;
+
+    fprintf(pf, "                                           \n");
+    fprintf(pf, "                          ===== ===== =====\n");
+    fprintf(pf, "                                           \n");
+    fprintf(pf, "                          %5.2f %5.2f %5.2f",
+                promParciales1,
+                promParciales2,
+                promGeneral);
+
+    fclose(pf);
+
+    return 1;
 }

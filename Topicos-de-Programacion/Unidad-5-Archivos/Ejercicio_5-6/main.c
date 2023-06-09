@@ -10,6 +10,10 @@ int main()
 
     cantAlumnos = ingresarAlumnos(alumnos, &promediosGenerales);
     mostrarAlumnosPorPantalla(alumnos, cantAlumnos);
+    if(!cargarArchivoTextoAlumnosLongitudFija("alumnos-Long-Fija.txt", alumnos, cantAlumnos)){
+        printf("\nLo sentimos, ha ocurrido un error al generar el archivo");
+        return 1;
+    }
 
     return 0;
 }
