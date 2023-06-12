@@ -1,0 +1,18 @@
+Una biblioteca necesita un programa que actualice su stock de libros que mantiene en el archivo binario libros.dat y los datos 
+de ingreso de stock se cargan a través del archivo nuevo_stock.txt.
+Ambos archivos se encuentran ordenados por el ISBN (International Standard Book Number), que es la norma estándar que se utiliza 
+para identificar los libros.
+Se pide, realizar la función actualizar_stock que suma al stock de libros en el archivo binario la cantidad que informa el archivo de texto. 
+En el caso de no existir el ISBN de algún libro el archivo de texto o que el ISBN del libro en el archivo de texto sea inválido, debe 
+informarse en el archivo errores.txt.
+
+EL ISBN tiene el siguiente formato: 
+978 - <El código de país o lengua de origen (2 d.)> - <el editor (3 d.)> - <el número del artículo (4 d.)> - <verificador (1 d.)>. 
+Y el dígito verificador se agregar de manera que (sin tener en cuenta los guiones): 
+<suma de las cifras de lugares impares> + 3* <suma de las cifras de lugares pares>
+De múltiplo de 10. Los dígitos los numeramos de izquierda a derecha empezando por el número 1.
+
+Por ejemplo: 978-84-253-4025-3
+Suma cifras lugares impares: 9+8+4+5+4+2+3(Dígito verificador) = 35
+Suma cifras lugares pares: 7+8+2+3+0+5 = 25
+35 + 3*25 = 110
