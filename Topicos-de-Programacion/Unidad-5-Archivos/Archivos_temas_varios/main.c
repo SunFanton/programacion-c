@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Archivos.h"
+#include "OrdSeleccion.h"
+
+int compararDni(void*, void*);
 
 int main()
 {
@@ -18,6 +21,9 @@ int main()
                             {"Analia Marcel", 40567322, 9865, 22, {2,3,2021}, 8.5},
                             {"Emilio Trevinio", 43578498, 8764, 19, {23,7,2022}, 7.5},
                         };
+
+    ordenarSeleccionGenerico(alumnos1, sizeof(alumnos1)/sizeof(t_alumno), sizeof(t_alumno), compararDni);
+    ordenarSeleccionGenerico(alumnos2, sizeof(alumnos2)/sizeof(t_alumno), sizeof(t_alumno), compararDni);
 
     //Guardar en archivo binario y mostrar
     printf("\nGuardando archivo binario 1");
@@ -59,11 +65,37 @@ int main()
         return 1;
     }
 
-    //Archivo binario a texto
+    printf("\n\nMostrando archivo de texto 1 con longitud variable");
+    if(!mostrarArchivoTextoLongVariable("ArchivoTexto1LongVariable.txt")){
+         printf("\nNo se ha podido mostrar el archivo de texto 1");
+        return 1;
+    }
 
+    printf("\n\nMostrando archivo de texto 1 con longitud fija");
+    if(!mostrarArchivoTextoLongFija("ArchivoTexto1LongFija.txt")){
+         printf("\nNo se ha podido mostrar el archivo de texto 1");
+        return 1;
+    }
+
+    printf("\n\n------------------------------------------------------\n");
+
+    //Archivo binario a texto
+    printf("\nConvertir archivo binario 1 a archivo de texto con longitud variable");
+    if(!archivoAlumnoBinarioATextoLongVariable("ArchivoBin1.dat")){
+         printf("\nNo se han podido abrir los archivos");
+        return 1;
+    }
+
+    printf("\n\n------------------------------------------------------\n");
 
     //Archivo texto a binario
+    printf("\nConvertir archivo texto 1 con longitud variable a archivo binario");
+    if(!archivoAlumnoTextoLongVariableABinario("ArchivoTexto1LongVariable.txt")){
+         printf("\nNo se han podido abrir los archivos");
+        return 1;
+    }
 
+    printf("\n\n------------------------------------------------------\n");
 
     //Merge (union e interseccion) con dos archivos binarios
 
@@ -72,5 +104,13 @@ int main()
 
 
     return 0;
+}
+
+int compararDni(void *ptr1, void *ptr2){
+
+    t_alumno *alumno1 = (t_alumno*)ptr1;
+    t_alumno *alumno2 = (t_alumno*)ptr2;
+
+    return alumno1->dni-alumno2->dni;
 }
 

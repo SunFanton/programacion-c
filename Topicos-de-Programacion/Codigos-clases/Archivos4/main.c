@@ -123,23 +123,7 @@ int leer_alumno_de_arch(FILE* pf, t_alumno * alu)
         00000098Jose Perez                   M08.0001021999A
         00000110Alumno uno                   F07.5001022005I
         */
-//    return fscanf(pf, "%8d%29[^\n]%c%5f%2d%2d%4d%c\n",
-//                &alu->dni,
-//                alu->apyn,
-//                &alu->sexo,
-//                &alu->promedio,
-//                &alu->f_ing.d,
-//                &alu->f_ing.m,
-//                &alu->f_ing.a,
-//                &alu->estado)
-//                 == 8;
-
-/**
-        90|Sa, Lia|F|7.50|01/02/2005|A
-        98|Jose Perez|M|8.00|01/02/1999|A
-        110|Alumno uno|F|7.50|01/02/2005|I
-        */
-    return fscanf(pf, "%d|%[^|\n]|%c|%f|%d/%d/%d|%c\n",
+    return fscanf(pf, "%8d%29[^\n]%c%5f%2d%2d%4d%c\n",
                 &alu->dni,
                 alu->apyn,
                 &alu->sexo,
@@ -147,7 +131,23 @@ int leer_alumno_de_arch(FILE* pf, t_alumno * alu)
                 &alu->f_ing.d,
                 &alu->f_ing.m,
                 &alu->f_ing.a,
-                &alu->estado) == 8;
+                &alu->estado)
+                 == 8;
+
+/**
+        90|Sa, Lia|F|7.50|01/02/2005|A
+        98|Jose Perez|M|8.00|01/02/1999|A
+        110|Alumno uno|F|7.50|01/02/2005|I
+        */
+//    return fscanf(pf, "%d|%[^|\n]|%c|%f|%d/%d/%d|%c\n",
+//                &alu->dni,
+//                alu->apyn,
+//                &alu->sexo,
+//                &alu->promedio,
+//                &alu->f_ing.d,
+//                &alu->f_ing.m,
+//                &alu->f_ing.a,
+//                &alu->estado) == 8;
 }
 
 int cargar_archivo(char * path){
@@ -170,32 +170,14 @@ int cargar_archivo(char * path){
 
     ///fwrite(alu_vec, sizeof(t_alumno), 7, pf);
     ///fwrite(alu_vec, sizeof(alu_vec), 1, pf);
-//    for (i=0;i<7;i++)
-//    {
-//        /**
-//        00000090Sa, Lia                      F07.5001022005A
-//        00000098Jose Perez                   M08.0001021999A
-//        00000110Alumno uno                   F07.5001022005I
-//        */
-//        fprintf(pf,"%08d%-29s%c%05.2f%02d%02d%4d%c\n",
-//                alu_vec[i].dni,
-//                alu_vec[i].apyn,
-//                alu_vec[i].sexo,
-//                alu_vec[i].promedio,
-//                alu_vec[i].f_ing.d,
-//                alu_vec[i].f_ing.m,
-//                alu_vec[i].f_ing.a,
-//                alu_vec[i].estado);
-//    }
-
     for (i=0;i<7;i++)
     {
         /**
-        90|Sa, Lia|F|7.50|01/02/2005|A
-        98|Jose Perez|M|8.00|01/02/1999|A
-        110|Alumno uno|F|7.50|01/02/2005|I
+        00000090Sa, Lia                      F07.5001022005A
+        00000098Jose Perez                   M08.0001021999A
+        00000110Alumno uno                   F07.5001022005I
         */
-        fprintf(pf,"%d|%s|%c|%.2f|%02d/%02d/%4d|%c\n",
+        fprintf(pf,"%08d%-29s%c%05.2f%02d%02d%4d%c\n",
                 alu_vec[i].dni,
                 alu_vec[i].apyn,
                 alu_vec[i].sexo,
@@ -205,6 +187,24 @@ int cargar_archivo(char * path){
                 alu_vec[i].f_ing.a,
                 alu_vec[i].estado);
     }
+
+//    for (i=0;i<7;i++)
+//    {
+//        /**
+//        90|Sa, Lia|F|7.50|01/02/2005|A
+//        98|Jose Perez|M|8.00|01/02/1999|A
+//        110|Alumno uno|F|7.50|01/02/2005|I
+//        */
+//        fprintf(pf,"%d|%s|%c|%.2f|%02d/%02d/%4d|%c\n",
+//                alu_vec[i].dni,
+//                alu_vec[i].apyn,
+//                alu_vec[i].sexo,
+//                alu_vec[i].promedio,
+//                alu_vec[i].f_ing.d,
+//                alu_vec[i].f_ing.m,
+//                alu_vec[i].f_ing.a,
+//                alu_vec[i].estado);
+//    }
 
     fclose(pf);
     return 1;

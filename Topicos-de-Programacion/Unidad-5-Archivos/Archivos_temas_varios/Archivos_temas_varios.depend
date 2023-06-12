@@ -1,13 +1,14 @@
 # depslib dependency file v1.0
-1686498937 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.c
+1686524903 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.c
 	"Archivos.h"
 	<stdlib.h>
 	<stdio.h>
 
-1686498338 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.h
+1686523931 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.h
 	<stdlib.h>
+	<stdio.h>
 
-1686498725 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\main.c
+1686524296 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\main.c
 	<stdio.h>
 	<stdlib.h>
 	"Archivos.h"
