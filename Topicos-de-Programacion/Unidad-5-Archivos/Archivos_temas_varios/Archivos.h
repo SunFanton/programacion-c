@@ -26,5 +26,8 @@ int mostrarArchivoTextoLongVariable(const char *path);
 int mostrarArchivoTextoLongFija(const char *path);
 int archivoAlumnoBinarioATextoLongVariable(const char *path);
 int archivoAlumnoTextoLongVariableABinario(const char *path);
+int compararDni(void *ptr1, void *ptr2);
+int mergeArchivosBinAlumnoUnion(const char *path1, const char *path2, const char *pathRes);
+int mergeArchivosBinAlumnoInterseccion(const char *path1, const char *path2, const char *pathRes);
 
 #endif // ARCHIVOS_H_INCLUDED

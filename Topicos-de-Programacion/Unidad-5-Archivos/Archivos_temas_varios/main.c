@@ -16,12 +16,13 @@ int main()
                         };
     t_alumno alumnos2[] = {
                             {"Matias Gomez", 39789506, 1234, 26, {1,11,2019}, 7},
-                            {"Angela Torres", 41378947, 3452, 23, {20,6,2022}, 4.5},
+                            {"Angela Torres", 41378947, 3490, 23, {20,6,2022}, 4.5},
                             {"Tomas Gonzalez", 36847806, 5543, 33, {19,8,2019}, 6},
                             {"Analia Marcel", 40567322, 9865, 22, {2,3,2021}, 8.5},
                             {"Emilio Trevinio", 43578498, 8764, 19, {23,7,2022}, 7.5},
                         };
 
+    //Ordenamos de antemano ambas estructuras en este caso por dni
     ordenarSeleccionGenerico(alumnos1, sizeof(alumnos1)/sizeof(t_alumno), sizeof(t_alumno), compararDni);
     ordenarSeleccionGenerico(alumnos2, sizeof(alumnos2)/sizeof(t_alumno), sizeof(t_alumno), compararDni);
 
@@ -98,6 +99,33 @@ int main()
     printf("\n\n------------------------------------------------------\n");
 
     //Merge (union e interseccion) con dos archivos binarios
+    //Union
+    printf("\nRealizamos el merge union de dos archivos binarios");
+    if(!mergeArchivosBinAlumnoUnion("ArchivoBin1.dat", "ArchivoBin2.dat", "Alu-union.dat")){
+        printf("\nNo se han podido abrir los archivos");
+        return 1;
+    }
+     printf("\n\nMostrando archivo binario resultado");
+    if(!mostrarArchivoBinarioAlumno("Alu-union.dat")){
+        printf("\nNo se ha podido leer el archivo binario resultado");
+        return 1;
+    }
+
+    printf("\n\n------------------------------------------------------\n");
+
+     //Interseccion
+    printf("\nRealizamos el merge interseccion de dos archivos binarios");
+    if(!mergeArchivosBinAlumnoInterseccion("ArchivoBin1.dat", "ArchivoBin2.dat", "Alu-interseccion.dat")){
+        printf("\nNo se han podido abrir los archivos");
+        return 1;
+    }
+     printf("\n\nMostrando archivo binario resultado");
+    if(!mostrarArchivoBinarioAlumno("Alu-interseccion.dat")){
+        printf("\nNo se ha podido leer el archivo binario resultado");
+        return 1;
+    }
+
+    printf("\n\n------------------------------------------------------\n");
 
 
     //Indices (usando archivos binarios)
@@ -106,11 +134,5 @@ int main()
     return 0;
 }
 
-int compararDni(void *ptr1, void *ptr2){
 
-    t_alumno *alumno1 = (t_alumno*)ptr1;
-    t_alumno *alumno2 = (t_alumno*)ptr2;
-
-    return alumno1->dni-alumno2->dni;
-}
 

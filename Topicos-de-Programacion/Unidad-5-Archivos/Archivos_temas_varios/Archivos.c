@@ -211,3 +211,97 @@ int archivoAlumnoTextoLongVariableABinario(const char *path){
     fclose(pfTexto);
     return 1;
 }
+
+int compararDni(void *ptr1, void *ptr2){
+
+    t_alumno *alumno1 = (t_alumno*)ptr1;
+    t_alumno *alumno2 = (t_alumno*)ptr2;
+
+    return alumno1->dni-alumno2->dni;
+}
+
+int mergeArchivosBinAlumnoUnion(const char *path1, const char *path2, const char *pathRes){
+
+//Los elementos de cad archivo fueron guardados previamente ordenados (en este caso, por dni)
+    FILE *pf1 = fopen(path1, "rb");
+    FILE *pf2 = fopen(path2, "rb");
+    FILE *pfRes = fopen(pathRes, "wb");
+    t_alumno alu1,
+             alu2;
+
+    if(!pf1 || !pf2 || !pfRes)
+        return 0;
+
+    fread(&alu1,sizeof(t_alumno),1,pf1);
+    fread(&alu2,sizeof(t_alumno),1,pf2);
+    while(!feof(pf1) && !feof(pf2)){
+        int cmpRes = compararDni((void*)&alu1, (void*)&alu2);
+
+        if(cmpRes == 0){
+            fwrite(&alu1,sizeof(t_alumno),1,pfRes);
+            fread(&alu1,sizeof(t_alumno),1,pf1);
+            fread(&alu2,sizeof(t_alumno),1,pf2);
+        }
+        else if(cmpRes < 0){
+            fwrite(&alu1,sizeof(t_alumno),1,pfRes);
+            fread(&alu1,sizeof(t_alumno),1,pf1);
+        }
+        else if(cmpRes > 0){
+            fwrite(&alu2,sizeof(t_alumno),1,pfRes);
+            fread(&alu2,sizeof(t_alumno),1,pf2);
+        }
+    }
+     while(!feof(pf1)){
+        fwrite(&alu1, sizeof(t_alumno), 1, pfRes);
+        fread(&alu1, sizeof(t_alumno), 1, pf1);
+    }
+    while(!feof(pf2)){
+        fwrite(&alu2, sizeof(t_alumno), 1, pfRes);
+        fread(&alu2, sizeof(t_alumno), 1, pf2);
+    }
+
+
+    fclose(pf1);
+    fclose(pf2);
+    fclose(pfRes);
+
+    return 1;
+}
+
+int mergeArchivosBinAlumnoInterseccion(const char *path1, const char *path2, const char *pathRes){
+
+    //Los elementos de cad archivo fueron guardados previamente ordenados (en este caso, por dni)
+    FILE *pf1 = fopen(path1, "rb");
+    FILE *pf2 = fopen(path2, "rb");
+    FILE *pfRes = fopen(pathRes, "wb");
+    t_alumno alu1,
+             alu2;
+
+    if(!pf1 || !pf2 || !pfRes)
+        return 0;
+
+    fread(&alu1,sizeof(t_alumno),1,pf1);
+    fread(&alu2,sizeof(t_alumno),1,pf2);
+    while(!feof(pf1) && !feof(pf2)){
+        int cmpRes = compararDni((void*)&alu1, (void*)&alu2);
+
+        if(cmpRes == 0){
+            fwrite(&alu1,sizeof(t_alumno),1,pfRes);
+            fread(&alu1,sizeof(t_alumno),1,pf1);
+            fread(&alu2,sizeof(t_alumno),1,pf2);
+        }
+        else if(cmpRes < 0){
+             fread(&alu1, sizeof(t_alumno), 1, pf1);
+        }
+        else if(cmpRes > 0){
+             fread(&alu2, sizeof(t_alumno), 1, pf2);
+        }
+
+    }
+
+    fclose(pf1);
+    fclose(pf2);
+    fclose(pfRes);
+
+    return 1;
+}
