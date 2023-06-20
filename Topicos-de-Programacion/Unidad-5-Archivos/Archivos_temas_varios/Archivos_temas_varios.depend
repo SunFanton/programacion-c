@@ -1,15 +1,33 @@
 # depslib dependency file v1.0
-1686524903 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.c
+1687220600 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.c
 	"Archivos.h"
 	<stdlib.h>
 	<stdio.h>
+	"MiString.h"
 
-1686523931 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.h
+1687221650 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\archivos.h
 	<stdlib.h>
 	<stdio.h>
 
-1686524296 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\main.c
+1687221151 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\main.c
 	<stdio.h>
 	<stdlib.h>
 	"Archivos.h"
+	"OrdSeleccion.h"
+
+1686529735 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\ordseleccion.h
+	<stdlib.h>
+
+1687211829 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\mistring.c
+	"MiString.h"
+	<stdio.h>
+	<stdlib.h>
+
+1687211837 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\mistring.h
+	<stdlib.h>
+	<stdio.h>
+
+1686529745 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\unidad-5-archivos\archivos_temas_varios\ordselecion.c
+	"OrdSeleccion.h"
+	<stdlib.h>
 

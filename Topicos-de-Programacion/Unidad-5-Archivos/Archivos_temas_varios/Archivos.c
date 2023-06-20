@@ -1,6 +1,7 @@
 #include "Archivos.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "MiString.h"
 
 int grabarArchivoBinario(const char *path, void *data, size_t tam){
 
@@ -120,6 +121,59 @@ int mostrarArchivoTextoLongVariable(const char *path){
     return 1;
 }
 
+int mostrarArchivoTextoLongVariableConStringH(const char *path){
+
+    FILE *pf = fopen(path, "rb");
+    if(!pf)
+        return 0;
+
+    char cadena[100];
+    t_alumno alu;
+
+    while(fgets(cadena,sizeof(cadena),pf)){
+
+        char *aux = miStrchr(cadena, '\n');
+        *aux = '\0';
+        //Promedio
+        aux = miStrrchr(cadena,'|');
+        sscanf(aux + 1, "%f", &alu.prom);
+        //Fecha de ingreso
+        *aux = '\0';
+        aux = miStrrchr(cadena, '|');
+        sscanf(aux + 1, "%d/%d/%d",  &alu.fechaIngreso.dia,
+                                     &alu.fechaIngreso.mes,
+                                     &alu.fechaIngreso.anio);
+        //Edad
+        *aux = '\0';
+        aux = miStrrchr(cadena, '|');
+        sscanf(aux + 1, "%d", &alu.edad);
+        //Legajo
+        *aux = '\0';
+        aux = miStrrchr(cadena, '|');
+        sscanf(aux + 1, "%d", &alu.legajo);
+        //DNI
+        *aux = '\0';
+        aux = miStrrchr(cadena, '|');
+        sscanf(aux + 1, "%d", &alu.dni);
+        //Apellido y nombre
+        *aux = '\0';
+        sscanf(cadena, "%[^|\n]", alu.apeNom);
+
+        printf("\n%s %d %d %d %d/%d/%d %f",
+               alu.apeNom,
+               alu.dni,
+               alu.legajo,
+               alu.edad,
+               alu.fechaIngreso.dia,
+               alu.fechaIngreso.mes,
+               alu.fechaIngreso.anio,
+               alu.prom);
+    }
+
+    fclose(pf);
+    return 1;
+}
+
 int mostrarArchivoTextoLongFija(const char *path){
 
     FILE *pf = fopen(path, "rt");
@@ -220,6 +274,14 @@ int compararDni(void *ptr1, void *ptr2){
     return alumno1->dni-alumno2->dni;
 }
 
+int compararDniIdxAlu(void *ptr1, void *ptr2){
+
+    idx_alumno *idx1 = (idx_alumno*)ptr1;
+    idx_alumno *idx2 = (idx_alumno*)ptr2;
+
+    return idx1->dni - idx2->dni;
+}
+
 int mergeArchivosBinAlumnoUnion(const char *path1, const char *path2, const char *pathRes){
 
 //Los elementos de cad archivo fueron guardados previamente ordenados (en este caso, por dni)
@@ -303,5 +365,102 @@ int mergeArchivosBinAlumnoInterseccion(const char *path1, const char *path2, con
     fclose(pf2);
     fclose(pfRes);
 
+    return 1;
+}
+
+int construirIndice(const char *pathMaster, const char *pathIdx){
+
+    FILE *pfMaster = fopen(pathMaster, "rb");
+    FILE *pfIdx = fopen(pathIdx, "wb");
+
+    if(!pfMaster || !pfIdx)
+        return 0;
+
+    t_alumno alu;
+    idx_alumno idx;
+    int n = 0;
+
+    while(fread(&alu, sizeof(t_alumno), 1, pfMaster)){
+        idx.dni = alu.dni;
+        idx.indice = n++;
+        fwrite(&idx, sizeof(idx), 1, pfIdx);
+    }
+
+    fclose(pfMaster);
+    fclose(pfIdx);
+    return 1;
+}
+
+int ordenarArchivoIndices(const char *path){
+
+    FILE *pf = fopen(path, "r+b");
+    if(!pf)
+        return 0;
+
+    fseek(pf, 0, SEEK_END);
+    size_t cantReg = ftell(pf)/sizeof(idx_alumno);
+    idx_alumno *indices = (idx_alumno*)malloc(sizeof(idx_alumno)*cantReg);
+    fseek(pf, 0, SEEK_SET);
+    fread(indices, sizeof(idx_alumno), cantReg, pf);
+
+    ordenarSeleccionGenerico(indices, cantReg, sizeof(idx_alumno), compararDniIdxAlu);
+    fseek(pf, 0, SEEK_SET);
+    fwrite(indices, sizeof(idx_alumno), cantReg, pf);
+
+    fclose(pf);
+    free(indices);
+    return 1;
+}
+
+int mostrarArchivoBinarioIndices(const char *path){
+
+    FILE *pf = fopen(path, "rb");
+    if(!pf)
+        return 0;
+
+    idx_alumno indice;
+
+    while(fread(&indice, sizeof(idx_alumno), 1, pf)){
+        printf("\nClave: %d, posicion: %d", indice.dni, indice.indice);
+    }
+
+    fclose(pf);
+    return 1;
+}
+
+int buscarAlumnoPorArchivoIndices(const char *pathIdx, const char *pathMaster, int dni){
+
+    FILE *pfIdx = fopen(pathIdx, "rb");
+    FILE *pfMaster = fopen(pathMaster, "rb");
+
+    if(!pfIdx || !pfMaster)
+        return 0;
+
+    t_alumno alu;
+    idx_alumno indice;
+
+    while(fread(&indice, sizeof(idx_alumno), 1, pfIdx)){
+        if(indice.dni == dni){
+            fseek(pfMaster, (long)(sizeof(t_alumno)*indice.indice), SEEK_SET);
+            fread(&alu, sizeof(t_alumno), 1, pfMaster);
+            printf("\nEncontrado: %s %d %d %d %d/%d/%d %f",
+                   alu.apeNom,
+                   alu.dni,
+                   alu.legajo,
+                   alu.edad,
+                   alu.fechaIngreso.dia,
+                   alu.fechaIngreso.mes,
+                   alu.fechaIngreso.anio,
+                   alu.prom);
+
+            fclose(pfIdx);
+            fclose(pfMaster);
+            return 1;
+        }
+    }
+    printf("\nNo encontrado");
+
+    fclose(pfIdx);
+    fclose(pfMaster);
     return 1;
 }

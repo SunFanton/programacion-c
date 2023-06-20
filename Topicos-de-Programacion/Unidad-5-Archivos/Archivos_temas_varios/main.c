@@ -22,7 +22,13 @@ int main()
                             {"Emilio Trevinio", 43578498, 8764, 19, {23,7,2022}, 7.5},
                         };
 
-    //Ordenamos de antemano ambas estructuras en este caso por dni
+    t_alumno alumnos3[] = {
+                            {"Sandra Gomez", 45678987, 3456, 18, {2,2,2022}, 8.5},
+                            {"Matias Freire", 34562780, 4231, 34, {14,5,2009}, 6.5},
+                            {"Tamara Diaz", 41567287, 2341, 23, {25,3,2019}, 5}
+                        };
+
+    //Ordenamos de antemano ambas estructuras en este caso por dni (para usar con el merge y los indices)
     ordenarSeleccionGenerico(alumnos1, sizeof(alumnos1)/sizeof(t_alumno), sizeof(t_alumno), compararDni);
     ordenarSeleccionGenerico(alumnos2, sizeof(alumnos2)/sizeof(t_alumno), sizeof(t_alumno), compararDni);
 
@@ -68,6 +74,12 @@ int main()
 
     printf("\n\nMostrando archivo de texto 1 con longitud variable");
     if(!mostrarArchivoTextoLongVariable("ArchivoTexto1LongVariable.txt")){
+         printf("\nNo se ha podido mostrar el archivo de texto 1");
+        return 1;
+    }
+
+     printf("\n\nMostrando archivo de texto 1 con longitud variable usando MiString.h");
+    if(!mostrarArchivoTextoLongVariableConStringH("ArchivoTexto1LongVariable.txt")){
          printf("\nNo se ha podido mostrar el archivo de texto 1");
         return 1;
     }
@@ -129,6 +141,57 @@ int main()
 
 
     //Indices (usando archivos binarios)
+    printf("\nGuardando archivo binario maestro para indices");
+    if(!grabarArchivoBinario("ArchivoBinMaestro.dat", alumnos3, sizeof(alumnos3))){
+        printf("\nNo se ha podido grabar el archivo binario maestro");
+        return 1;
+    }
+
+    printf("\n\nGuardando archivo binario de indices");
+    if(!construirIndice("ArchivoBinMaestro.dat", "ArchivoBinIndices.idx")){
+        printf("\nNo se ha podido grabar el archivo binario de indices");
+        return 1;
+    }
+
+    printf("\n\nOrdenando por clave el archivo binario de indices");
+    if(!ordenarArchivoIndices("ArchivoBinIndices.idx")){
+        printf("\nNo se ha podido ordenar el archivo de indices");
+        return 1;
+    }
+
+    printf("\n\nMostrando el archivo maestro");
+    if(!mostrarArchivoBinarioAlumno("ArchivoBinMaestro.dat")){
+        printf("\nNo se ha podido mostrar el archivo binario maestro");
+        return 1;
+    }
+
+    printf("\n\nMostrando el archivo de indices");
+    if(!mostrarArchivoBinarioIndices("ArchivoBinIndices.idx")){
+        printf("\nNo se ha podido mostrar el archivo binario de indices");
+        return 1;
+    }
+
+
+    printf("\n\nBuscando alumno");
+    if(!buscarAlumnoPorArchivoIndices("ArchivoBinIndices.idx", "ArchivoBinMaestro.dat", 34562780)){
+        printf("\nNo se ha podido buscar el alumno");
+        return 1;
+    }
+
+    printf("\n\nBuscando alumno");
+    if(!buscarAlumnoPorArchivoIndices("ArchivoBinIndices.idx", "ArchivoBinMaestro.dat", 45678987)){
+        printf("\nNo se ha podido buscar el alumno");
+        return 1;
+    }
+
+    printf("\n\nBuscando alumno");
+    if(!buscarAlumnoPorArchivoIndices("ArchivoBinIndices.idx", "ArchivoBinMaestro.dat", 1234)){
+        printf("\nNo se ha podido buscar el alumno");
+        return 1;
+    }
+
+
+    printf("\n\n------------------------------------------------------\n");
 
 
     return 0;
