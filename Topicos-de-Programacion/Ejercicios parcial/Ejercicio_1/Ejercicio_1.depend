@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1687312201 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\ejercicios parcial\ejercicio_1\funciones.c
+	"Funciones.h"
+	<stdlib.h>
+	<stdio.h>
+
+1687310562 c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\ejercicios parcial\ejercicio_1\funciones.h
+	<stdlib.h>
+	<stdio.h>
+
+1687312365 source:c:\users\sol\documents\programacion (varios)\c\tps\topicos-de-programacion\ejercicios parcial\ejercicio_1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Funciones.h"
+

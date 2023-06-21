@@ -1,0 +1,5 @@
+Alicia|Lewis Carrol| 
+Mio Cid|Leyendas populares|978-23-340
+La sirenita|Hans C. Andersen|978-56-340-1234-1
+El aleph|Jorge Borges|978-84-340-0502-0
+Sherlock Holmes|Arthur C. Doyle|978-84-340-0908-0
