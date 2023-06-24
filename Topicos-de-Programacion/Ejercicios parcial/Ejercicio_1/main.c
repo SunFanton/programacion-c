@@ -47,6 +47,10 @@ int main()
         printf("\nNo se ha podido realizar la carga del archivo");
         return 1;
     }
+    if(!reordenarArchivoBinarioLibros("libros.dat", "rb")){
+        printf("\nNo se ha podido realizar la lectura y reorden del archivo");
+        return 1;
+    }
     printf("\nLectura despues de agregado: \n");
     if(!lecturaArchivoBinarioLibros("libros.dat")){
         printf("\nNo se ha podido leer el contenido de libros.dat");

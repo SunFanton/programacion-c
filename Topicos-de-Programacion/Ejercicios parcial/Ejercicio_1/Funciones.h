@@ -14,6 +14,7 @@ int cargaArchivoBinarioLibros(const char *path, const char *mode, t_libro *libro
 int lecturaArchivoBinarioLibros(const char *path);
 int cargaArchivoTextoLibros(const char *path, const char *mode, t_libro *libros, size_t cant);
 int lecturaYValidacionArchivoTextoLibros(const char *path);
+int reordenarArchivoBinarioLibros(const char *path, const char *mode);
 int validarISBN(const char *isbn);
 size_t strlenPropio(const char *cadena);
 char *strcpyPropio (char *destino, char *origen);

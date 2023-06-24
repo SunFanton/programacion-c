@@ -60,14 +60,39 @@ int lecturaYValidacionArchivoTextoLibros(const char *path){
 
     while (fgets(linea, sizeof(linea), pf) != NULL) {
         if (sscanf(linea, "%[^|]|%[^|]|%[^|\n]\n", libro.titulo, libro.autor, libro.isbn) == 3) {
-            if(validarISBN(libro.isbn))
+            if(validarISBN(libro.isbn)){
                 cargaArchivoBinarioLibros("libros.dat", "ab", &libro, sizeof(t_libro));
+            }
             else
                 cargaArchivoTextoLibros("error.txt", "wb", &libro, 1);
         }
     }
 
     fclose(pf);
+    return 1;
+}
+
+int reordenarArchivoBinarioLibros(const char *path, const char *mode){
+
+    FILE *pf = fopen(path, mode);
+    if(!pf)
+        return 0;
+
+    fseek(pf, 0, SEEK_END);
+    size_t totalTam = ftell(pf);
+    t_libro *libros = (t_libro*)malloc(totalTam);
+    t_libro *inicio = libros;
+    fseek(pf, 0, SEEK_SET);
+
+    while(fread(libros, sizeof(t_libro), 1, pf)){
+        libros++;
+    }
+    libros = inicio;
+    ordenarPorSeleccion(libros, totalTam/sizeof(t_libro), sizeof(t_libro), comparaISBN);
+    cargaArchivoBinarioLibros("libros.dat", "wb", libros, totalTam);
+
+    fclose(pf);
+    free(libros);
     return 1;
 }
 
