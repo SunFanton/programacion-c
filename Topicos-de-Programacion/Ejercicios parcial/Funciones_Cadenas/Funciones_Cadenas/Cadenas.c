@@ -30,6 +30,7 @@ char *miStrrchr(char *s, int c){
     for(int i = 0; i < tam; i++){
         if(*s == (char)c)
             return s;
+        s--;
     }
     return NULL;
 }
@@ -37,22 +38,25 @@ char *miStrrchr(char *s, int c){
 char *miStrcpy(char *dest, const char *src){
 
     char* originalDest = dest;
+    size_t tamSrc = miStrlen(src);
 
-    while (*src && dest - originalDest <= miStrlen(src)) {
+    while (*src && dest - originalDest <= tamSrc) {
         *dest = *src;
         dest++;
         src++;
     }
 
     *dest = '\0';
-
-    return originalDest;
+    dest = originalDest;
+    return dest;
 }
 
 char *miStrcat(char*s1, const char *s2){
 
     size_t tam = miStrlen(s1) + miStrlen(s2) + 1;
     char *temp = (char*)malloc(sizeof(char)*tam);
+    char *inicioS1 = s1,
+         *inicioS2 = s2;
 
     if(temp == NULL)
         return NULL;
@@ -70,17 +74,11 @@ char *miStrcat(char*s1, const char *s2){
         s2++;
     }
     temp[i] = '\0';
+    s1 = inicioS1;
+    s2 = inicioS2;
     miStrcpy(s1, temp);
     free(temp);
     return s1;
-}
-
-int miToLower(char c){
-
-    if(c >= 'A' && c <= 'Z')
-        c = c + ('a' - 'A');
-
-    return c;
 }
 
 int miStrcmp(const char *s1, const char *s2){
@@ -104,13 +102,15 @@ int miStrcmpi(const char *s1, const char *s2){
     int c1,
         c2;
     while(*s1 && *s2){
-        c1 = miToLower(*s1);
-        c2 = miToLower(*s2);
+        c1 = MI_TO_LOWER(*s1);
+        c2 = MI_TO_LOWER(*s2);
 
         if(c1 < c2)
             return -1;
         else if(c1 > c2)
             return 1;
+        s1++;
+        s2++;
     }
 
     if(*s1)
@@ -166,4 +166,58 @@ void *miMemmove(void *s1, const void *s2, size_t n){
 
     free(temp);
     return dest;
+}
+
+
+void normalizeString(char *str) {
+    int i, j;
+    int wordStart = 1; // Variable para indicar si el siguiente carácter debe ser una letra mayúscula
+    int wordEnd = 0; // Variable para indicar si se encontró un espacio o tabulación al final de una palabra
+
+    // Eliminar espacios o tabulaciones al inicio de la cadena
+    while (*str == ' ' || *str == '\t') {
+        for (i = 0; str[i] != '\0'; i++) {
+            str[i] = str[i + 1];
+        }
+    }
+
+    // Iterar a través de la cadena para normalizar los caracteres
+    for (i = 0, j = 0; str[i] != '\0'; i++) {
+        if (str[i] == ' ' || str[i] == '\t') {
+            wordEnd = 1; // Marcar el final de una palabra
+        } else {
+            if (wordEnd) {
+                // Eliminar espacios o tabulaciones entre palabras
+                if (j > 0) {
+                    str[j++] = ' ';
+                }
+                wordEnd = 0;
+                wordStart = 1;
+            }
+
+            // Normalizar las letras de cada palabra
+            if (wordStart) {
+                if (str[i] >= 'a' && str[i] <= 'z') {
+                    str[j++] = str[i] - 32; // Convertir a mayúscula
+                } else {
+                    str[j++] = str[i]; // Mantener el carácter original
+                }
+                wordStart = 0;
+            } else {
+                if (str[i] >= 'A' && str[i] <= 'Z') {
+                    str[j++] = str[i] + 32; // Convertir a minúscula
+                } else {
+                    str[j++] = str[i]; // Mantener el carácter original
+                }
+            }
+        }
+    }
+
+    // Eliminar espacios o tabulaciones al final de la cadena
+    while (j > 0 && (str[j - 1] == ' ' || str[j - 1] == '\t')) {
+        j--;
+    }
+
+    // Agregar el carácter nulo al final de la cadena
+    str[j] = '\0';
 }
