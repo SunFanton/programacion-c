@@ -70,5 +70,10 @@ int main()
     normalizeString(cadANormalizar);
     printf("Cadena normalizada: %s\n\n", cadANormalizar);
 
+
+    //atoi
+    char cadAtoi[10] = "123abc";
+    printf("%s a %d", cadAtoi, miAtoi(cadAtoi));
+
     return 0;
 }

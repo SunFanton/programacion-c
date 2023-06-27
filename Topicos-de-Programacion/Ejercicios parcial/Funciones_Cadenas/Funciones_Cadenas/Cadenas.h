@@ -16,5 +16,7 @@ char *miStrstr(const char *s1, const char *s2);
 void *miMemcpy(void *s1, const void *s2, size_t n);
 void *miMemmove(void *s1, const void *s2, size_t n);
 void normalizeString(char *str);
+int miAtoi(const char *numPtr);
+
 
 #endif // CADENAS_H_INCLUDED

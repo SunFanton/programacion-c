@@ -168,7 +168,7 @@ void *miMemmove(void *s1, const void *s2, size_t n){
     return dest;
 }
 
-
+/*
 void normalizeString(char *str) {
     int i, j;
     int wordStart = 1; // Variable para indicar si el siguiente carácter debe ser una letra mayúscula
@@ -220,4 +220,69 @@ void normalizeString(char *str) {
 
     // Agregar el carácter nulo al final de la cadena
     str[j] = '\0';
+}
+*/
+
+void normalizeString(char *str){
+
+    int i = 0,
+        j = 0,
+        wordEnd = 0,
+        wordStart = 1;
+
+    while(*str == ' ' || *str == '\t'){
+        for(i = 0; str[i] != '\0'; i++){
+            str[i] = str[i+1];
+        }
+    }
+
+    for(i = 0, j = 0; str[i] != '\0'; i++){
+        if(str[i] == ' ' || str[i] == '\t'){
+            wordEnd = 1;
+        }
+        else{
+            if(wordEnd){
+                if(j > 0){
+                    str[j++] = ' ';
+                }
+                wordEnd = 0;
+                wordStart = 1;
+            }
+            if(wordStart){
+                if(str[i] >= 'a' && str[i] <= 'z'){
+                    str[j++] = str[i] - 32;
+                }
+                else{
+                    str[j++] = str[i];
+                }
+                wordStart = 0;
+            }
+            else{
+                if(str[i] >= 'A' && str[i] <= 'Z'){
+                    str[j++] = str[i] + 32;
+                }
+                else{
+                    str[j++] = str[i];
+                }
+            }
+        }
+    }
+
+    while(j > 0 && (str[j - 1] == ' ' || str[j - 1]== '\t')){
+        j--;
+    }
+
+    str[j] = '\0';
+}
+
+int miAtoi(const char *numPtr){
+
+    int num = 0;
+    int i = 0;
+
+    while(numPtr[i] && (numPtr[i]>='0' && numPtr[i]<='9')){
+        num = num * 10 + (numPtr[i] - '0');
+        i++;
+    }
+    return num;
 }
