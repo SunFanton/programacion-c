@@ -123,21 +123,26 @@ int miStrcmpi(const char *s1, const char *s2){
 
 char *miStrstr(const char *s1, const char *s2){
 
-    char *inicioS2 = s2;
+    if(*s2 == '\0')
+        return NULL;
 
-    while(*s1){
+    char *cadenaPrinc = s1;
 
-        if(*s1 == *s2 && *s2)
-            s2++;
-        else if(*s1 != *s2 && *s2)
-            s2 = inicioS2;
-        else if(!*s2)
-            break;
+     while(*cadenaPrinc){
+        char *c1 = cadenaPrinc;
+        char *c2 = s2;
 
-        s1++;
-    }
+        while(*c1 && *c2 && *c1 == *c2){
+            c1++;
+            c2++;
+        }
 
-    return *s2 == '\0' ? (char*)(s1 - miStrlen(s2)) : NULL;
+        if(*c2 == '\0'){
+            return (char*)cadenaPrinc;
+        }
+        cadenaPrinc++;
+     }
+     return NULL;
 }
 
 void *miMemcpy(void *s1, const void *s2, size_t n){
